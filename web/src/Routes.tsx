@@ -14,6 +14,7 @@ import HappinessRatingsLayout from 'src/layouts/HappinessRatingsLayout'
 const Routes = () => {
   return (
     <Router>
+      <Route path="/" page={HomePage} name="home" />
       <Set wrap={HappinessRatingsLayout}>
         <Route path="/happiness-ratings/new" page={HappinessRatingNewHappinessRatingPage} name="newHappinessRating" />
         <Route path="/happiness-ratings/{id:Int}/edit" page={HappinessRatingEditHappinessRatingPage} name="editHappinessRating" />
