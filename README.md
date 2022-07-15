@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/70d7be82-d529-4588-85a9-c5139a482116/deploy-status)](https://app.netlify.com/sites/mindscious/deploys)
+
 # README
 
 Welcome to [RedwoodJS](https://redwoodjs.com)!
