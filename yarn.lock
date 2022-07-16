@@ -2404,6 +2404,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/satisfy@npm:^4.5.5":
+  version: 4.5.5
+  resolution: "@fontsource/satisfy@npm:4.5.5"
+  checksum: 766c13247f13db59f471e0217bf96346b4d5cd755b5a19d2a9c7867a5994a0c24ab31535916dc6d28e6842165cc79f9a723075746f05f6093d4148deebb6f52b
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.0.1, @gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -24611,6 +24618,7 @@ __metadata:
     "@emotion/react": ^11.9.3
     "@emotion/styled": ^11.9.3
     "@fontsource/roboto": ^4.5.7
+    "@fontsource/satisfy": ^4.5.5
     "@mui/icons-material": ^5.8.4
     "@mui/material": ^5.9.0
     "@redwoodjs/auth": 2.1.0

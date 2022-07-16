@@ -17,6 +17,7 @@
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@fontsource/roboto": "^4.5.7",
+    "@fontsource/satisfy": "^4.5.5",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.0",
     "@redwoodjs/auth": "2.1.0",

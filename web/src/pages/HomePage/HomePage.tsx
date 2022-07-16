@@ -1,4 +1,3 @@
-import { UserButton, SignInButton } from '@clerk/clerk-react'
 import Typography from '@mui/material/Typography'
 
 import { useAuth } from '@redwoodjs/auth'
@@ -7,15 +6,13 @@ const HomePage = () => {
   const { currentUser, isAuthenticated } = useAuth()
   return (
     <>
-      {isAuthenticated ? (
-        <UserButton afterSignOutUrl={window.location.href} />
-      ) : (
-        <SignInButton mode="modal">
-          <button>Log in</button>
-        </SignInButton>
-      )}
-
-      <Typography variant="h2" component="h1" gutterBottom>
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        align="center"
+        sx={{ mt: 2 }}
+      >
         👋Hi {isAuthenticated ? currentUser.firstName : 'there'}, how are you?
       </Typography>
     </>
