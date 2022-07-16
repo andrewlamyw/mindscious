@@ -1,5 +1,7 @@
 import { render } from '@redwoodjs/testing/web'
 
+import { ClerkAuthProvider } from 'src/contexts/ClerkAuthContext'
+
 import HomePage from './HomePage'
 
 //   Improve this test with help from the Redwood Testing Doc:
@@ -8,7 +10,11 @@ import HomePage from './HomePage'
 describe('HomePage', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<HomePage />)
+      render(
+        <ClerkAuthProvider>
+          <HomePage />
+        </ClerkAuthProvider>
+      )
     }).not.toThrow()
   })
 })

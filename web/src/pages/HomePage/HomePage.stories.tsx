@@ -1,12 +1,12 @@
-import { ClerkProvider } from '@clerk/clerk-react'
+import { ClerkAuthProvider } from 'src/contexts/ClerkAuthContext'
 
 import HomePage from './HomePage'
 
 export const generated = () => {
   return (
-    <ClerkProvider>
+    <ClerkAuthProvider>
       <HomePage />
-    </ClerkProvider>
+    </ClerkAuthProvider>
   )
 }
 
