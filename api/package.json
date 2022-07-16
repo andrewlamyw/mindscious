@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "@clerk/clerk-sdk-node": "^3.8.6",
     "@redwoodjs/api": "2.1.0",
     "@redwoodjs/graphql-server": "2.1.0"
   }
