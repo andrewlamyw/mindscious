@@ -1,3 +1,5 @@
+import { UserButton, SignInButton } from '@clerk/clerk-react'
+
 import { useAuth } from '@redwoodjs/auth'
 
 const HomePage = () => {
@@ -6,9 +8,13 @@ const HomePage = () => {
     <>
       <h1>👋Hi {isAuthenticated ? currentUser.firstName : 'there'}!</h1>
 
-      <button onClick={isAuthenticated ? logOut : logIn}>
-        {isAuthenticated ? 'Log Out' : 'Log In'}
-      </button>
+      {isAuthenticated ? (
+        <UserButton afterSignOutAll={window.location.href} />
+      ) : (
+        <SignInButton mode="modal">
+          <button>Log in</button>
+        </SignInButton>
+      )}
     </>
   )
 }
