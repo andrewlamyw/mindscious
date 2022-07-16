@@ -20,7 +20,7 @@ const Header = () => {
           color="transparent"
           sx={{ boxShadow: 'none' }}
         >
-          <Toolbar>
+          <Toolbar disableGutters>
             <Typography
               variant="h5"
               component="a"
