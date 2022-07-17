@@ -1,10 +1,32 @@
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js'
 import humanize from 'humanize-string'
+import { Line } from 'react-chartjs-2'
+import { HappinessRating } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/HappinessRating/HappinessRatingsCell'
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+)
 
 const DELETE_HAPPINESS_RATING_MUTATION = gql`
   mutation DeleteHappinessRatingMutation($id: Int!) {
@@ -53,29 +75,67 @@ const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
 
-const HappinessRatingsList = ({ happinessRatings }) => {
-  const [deleteHappinessRating] = useMutation(DELETE_HAPPINESS_RATING_MUTATION, {
-    onCompleted: () => {
-      toast.success('HappinessRating deleted')
+const HappinessRatingsList = ({
+  happinessRatings,
+}: {
+  happinessRatings: [HappinessRating]
+}) => {
+  const labels = happinessRatings.map(() => '')
+
+  const lineChartData = {
+    labels,
+    datasets: [
+      {
+        data: happinessRatings.map((rating) => rating.rating),
+        label: 'Happiness Ratings',
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+    ],
+  }
+
+  const lineChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+      title: {
+        display: true,
+        text: 'Happiness Ratings Line Chart',
+      },
     },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-    // This refetches the query on the list page. Read more about other ways to
-    // update the cache over here:
-    // https://www.apollographql.com/docs/react/data/mutations/#making-all-other-cache-updates
-    refetchQueries: [{ query: QUERY }],
-    awaitRefetchQueries: true,
-  })
+  }
+
+  const [deleteHappinessRating] = useMutation(
+    DELETE_HAPPINESS_RATING_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('HappinessRating deleted')
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+      // This refetches the query on the list page. Read more about other ways to
+      // update the cache over here:
+      // https://www.apollographql.com/docs/react/data/mutations/#making-all-other-cache-updates
+      refetchQueries: [{ query: QUERY }],
+      awaitRefetchQueries: true,
+    }
+  )
 
   const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete happinessRating ' + id + '?')) {
+    if (
+      confirm('Are you sure you want to delete happinessRating ' + id + '?')
+    ) {
       deleteHappinessRating({ variables: { id } })
     }
   }
 
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
+      <Line data={lineChartData} options={lineChartOptions} />
+
       <table className="rw-table">
         <thead>
           <tr>
@@ -99,7 +159,9 @@ const HappinessRatingsList = ({ happinessRatings }) => {
                 <nav className="rw-table-actions">
                   <Link
                     to={routes.happinessRating({ id: happinessRating.id })}
-                    title={'Show happinessRating ' + happinessRating.id + ' detail'}
+                    title={
+                      'Show happinessRating ' + happinessRating.id + ' detail'
+                    }
                     className="rw-button rw-button-small"
                   >
                     Show
