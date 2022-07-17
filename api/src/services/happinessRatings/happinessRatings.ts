@@ -15,7 +15,7 @@ export const happinessRating: QueryResolvers['happinessRating'] = ({ id }) => {
 export const createHappinessRating: MutationResolvers['createHappinessRating'] =
   ({ input }) => {
     return db.happinessRating.create({
-      data: input,
+      data: { ...input, createdBy: context.currentUser.id },
     })
   }
 

@@ -15,7 +15,6 @@ export const schema = gql`
   input CreateHappinessRatingInput {
     rating: Int!
     description: String
-    createdBy: String!
   }
 
   input UpdateHappinessRatingInput {
