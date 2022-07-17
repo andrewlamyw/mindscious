@@ -1,7 +1,13 @@
+import { ClerkAuthProvider } from 'src/contexts/ClerkAuthContext'
+
 import MainLayout from './MainLayout'
 
 export const generated = () => {
-  return <MainLayout />
+  return (
+    <ClerkAuthProvider>
+      <MainLayout />
+    </ClerkAuthProvider>
+  )
 }
 
 export default { title: 'Layouts/MainLayout' }

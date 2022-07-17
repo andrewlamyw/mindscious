@@ -1,7 +1,13 @@
+import { ClerkAuthProvider } from 'src/contexts/ClerkAuthContext'
+
 import Header from './Header'
 
 export const generated = () => {
-  return <Header />
+  return (
+    <ClerkAuthProvider>
+      <Header />
+    </ClerkAuthProvider>
+  )
 }
 
 export default { title: 'Components/Header' }
