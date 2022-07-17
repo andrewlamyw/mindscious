@@ -58,7 +58,13 @@ export const Success = ({
 
   const onSave = (input, id) => {
     updateHappinessRating({
-      variables: { id, input: { rating: parseInt(input.rating) } },
+      variables: {
+        id,
+        input: {
+          rating: parseInt(input.rating),
+          description: input.description?.trim(),
+        },
+      },
     })
   }
 

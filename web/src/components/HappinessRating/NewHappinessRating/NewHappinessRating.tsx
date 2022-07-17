@@ -29,9 +29,14 @@ const NewHappinessRating = () => {
     }
   )
 
-  const onSave = (input: { rating: string }) => {
+  const onSave = (input: { rating: string; description?: string }) => {
     createHappinessRating({
-      variables: { input: { rating: parseInt(input.rating) } },
+      variables: {
+        input: {
+          rating: parseInt(input.rating),
+          description: input.description?.trim(),
+        },
+      },
     })
   }
 

@@ -3,6 +3,7 @@ import Button from '@mui/material/Button'
 import Slider from '@mui/material/Slider'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles'
+import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { useForm } from 'react-hook-form'
 import { HappinessRating } from 'types/graphql'
@@ -25,7 +26,7 @@ const marks = [
 
 const StyledSlider = styled(Slider)(({ theme }) => ({
   color: '#52af77',
-  marginBottom: theme.spacing(5),
+  marginBottom: theme.spacing(3),
   width: '1rem',
   '& .MuiSlider-thumb': {
     height: 36,
@@ -95,7 +96,7 @@ const HappinessRatingForm: React.FC<{
           {props?.title}
         </Typography>
 
-        <Stack sx={{ height: 400, mt: 6 }} spacing={1} alignItems="center">
+        <Stack sx={{ height: 500, mt: 6 }} spacing={3} alignItems="center">
           <StyledSlider
             {...register('rating')}
             valueLabelDisplay="on"
@@ -109,6 +110,15 @@ const HappinessRatingForm: React.FC<{
             min={1}
           />
 
+          <TextField
+            {...register('description')}
+            multiline
+            sx={{ width: '100%', maxWidth: 'sm' }}
+            rows={2}
+            placeholder="Description (optional)"
+            defaultValue={props?.happinessRating?.description}
+          />
+
           <Button
             fullWidth
             disabled={props.loading}
@@ -116,7 +126,7 @@ const HappinessRatingForm: React.FC<{
             endIcon={<SaveIcon />}
             type="submit"
             size="large"
-            sx={{ maxWidth: '25rem' }}
+            sx={{ maxWidth: 'sm' }}
           >
             Save
           </Button>
