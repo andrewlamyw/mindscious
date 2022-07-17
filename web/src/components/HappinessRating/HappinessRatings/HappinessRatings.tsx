@@ -123,60 +123,72 @@ const HappinessRatingsList = ({
       <KeyTrends data={happinessRatings} />
 
       {isLargeScreen ? (
-        <table className="rw-table">
-          <thead>
-            <tr>
-              <th>Rating</th>
-              <th>Created at</th>
-              <th>Description</th>
-              <th>&nbsp;</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {happinessRatings.map((happinessRating) => (
-              <tr key={happinessRating.id}>
-                <td>{happinessRating.rating}</td>
-                <td>
-                  <MainDateTime datetime={happinessRating.createdAt} />
-                </td>
-                <td>{truncate(happinessRating.description)}</td>
-                <td>
-                  <nav className="rw-table-actions">
-                    <Link
-                      to={routes.happinessRating({ id: happinessRating.id })}
-                      title={'Show Rating #' + happinessRating.id + ' detail'}
-                      className="rw-button rw-button-small"
-                    >
-                      Show
-                    </Link>
-
-                    <Link
-                      to={routes.editHappinessRating({
-                        id: happinessRating.id,
-                      })}
-                      title={'Edit Rating #' + happinessRating.id}
-                      className="rw-button rw-button-small rw-button-blue"
-                    >
-                      Edit
-                    </Link>
-
-                    <button
-                      type="button"
-                      title={'Delete Rating # ' + happinessRating.id}
-                      className="rw-button rw-button-small rw-button-red"
-                      onClick={() =>
-                        onDeleteClick(happinessRating.id, happinessRating)
-                      }
-                    >
-                      Delete
-                    </button>
-                  </nav>
-                </td>
+        <Box sx={{ mb: 6 }}>
+          <table className="rw-table">
+            <thead>
+              <tr>
+                <th>Rating</th>
+                <th>Created at</th>
+                <th>Description</th>
+                <th>&nbsp;</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {happinessRatings.map((happinessRating) => (
+                <tr key={happinessRating.id}>
+                  <td>
+                    <Box
+                      sx={{ display: 'flex', justifyContent: 'space-around' }}
+                    >
+                      <Box sx={{ minWidth: '20px', display: 'inline-block' }}>
+                        {getRatingEmoji(happinessRating.rating)}
+                      </Box>
+
+                      <Box>{happinessRating.rating}</Box>
+                    </Box>
+                  </td>
+                  <td>
+                    <MainDateTime datetime={happinessRating.createdAt} />
+                  </td>
+                  <td>{truncate(happinessRating.description)}</td>
+                  <td>
+                    <nav className="rw-table-actions">
+                      <Link
+                        to={routes.happinessRating({ id: happinessRating.id })}
+                        title={'Show Rating #' + happinessRating.id + ' detail'}
+                        className="rw-button rw-button-small"
+                      >
+                        Show
+                      </Link>
+
+                      <Link
+                        to={routes.editHappinessRating({
+                          id: happinessRating.id,
+                        })}
+                        title={'Edit Rating #' + happinessRating.id}
+                        className="rw-button rw-button-small rw-button-blue"
+                      >
+                        Edit
+                      </Link>
+
+                      <button
+                        type="button"
+                        title={'Delete Rating # ' + happinessRating.id}
+                        className="rw-button rw-button-small rw-button-red"
+                        onClick={() =>
+                          onDeleteClick(happinessRating.id, happinessRating)
+                        }
+                      >
+                        Delete
+                      </button>
+                    </nav>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Box>
       ) : (
         <Box>
           <Typography variant="h6" gutterBottom component="div">
