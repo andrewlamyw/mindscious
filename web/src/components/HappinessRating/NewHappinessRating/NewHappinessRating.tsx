@@ -14,7 +14,7 @@ const CREATE_HAPPINESS_RATING_MUTATION = gql`
 `
 
 const NewHappinessRating = () => {
-  const { currentUser, isAuthenticated } = useAuth()
+  const { currentUser, isAuthenticated, loading: authLoading } = useAuth()
 
   const [createHappinessRating, { loading, error }] = useMutation(
     CREATE_HAPPINESS_RATING_MUTATION,
@@ -48,7 +48,7 @@ const NewHappinessRating = () => {
   return (
     <HappinessRatingForm
       onSave={onSave}
-      loading={loading}
+      loading={loading || authLoading}
       error={error}
       title={title}
     />

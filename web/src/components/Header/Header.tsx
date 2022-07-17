@@ -35,12 +35,8 @@ const Header = () => {
               Mindscious
             </Typography>
 
-            {isAuthenticated ? (
+            {isAuthenticated && (
               <UserButton afterSignOutUrl={window.location.href} />
-            ) : (
-              <SignInButton mode="modal">
-                <button>Log in</button>
-              </SignInButton>
             )}
           </Toolbar>
         </AppBar>

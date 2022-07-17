@@ -1,3 +1,5 @@
+import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
 import type { FindHappinessRatings } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -17,7 +19,20 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <Box
+    sx={{
+      display: 'flex',
+      justifyContent: 'center',
+      height: 'calc(100vh - 64px)',
+      alignItems: 'center',
+      flexDirection: 'column',
+    }}
+  >
+    <CircularProgress />
+    <Box sx={{ mt: 4 }}>Row, row, row your boat...</Box>
+  </Box>
+)
 
 export const Empty = () => {
   return (
