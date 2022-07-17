@@ -17453,6 +17453,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"luxon@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "luxon@npm:3.0.1"
+  checksum: b76f871e64e00d876ed3a1b0693bcd09e5f9a243b270a3775b7ef9ad753d85624e0ead27c0acd0776ecfa733abde16d090015d40839abb82b9a5b833c08b165b
+  languageName: node
+  linkType: hard
+
 "lz-string@npm:^1.4.4":
   version: 1.4.4
   resolution: "lz-string@npm:1.4.4"
@@ -24643,6 +24650,7 @@ __metadata:
     "@redwoodjs/router": 2.1.0
     "@redwoodjs/web": 2.1.0
     chart.js: ^3.8.0
+    luxon: ^3.0.1
     prop-types: 15.8.1
     react: 17.0.2
     react-chartjs-2: ^4.3.1

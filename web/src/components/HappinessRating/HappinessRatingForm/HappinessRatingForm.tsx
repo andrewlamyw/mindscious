@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography'
 import { useForm } from 'react-hook-form'
 import { HappinessRating } from 'types/graphql'
 
-import { useAuth } from '@redwoodjs/auth'
 import { Form, FormError } from '@redwoodjs/forms'
 
 const marks = [
@@ -67,6 +66,7 @@ const HappinessRatingForm: React.FC<{
   onSave: ({ rating }: { rating: string }, id?: number) => void
   happinessRating?: HappinessRating
   loading?: boolean
+  title?: string
 }> = (props) => {
   const formMethods = useForm()
   const { register } = formMethods
@@ -74,8 +74,6 @@ const HappinessRatingForm: React.FC<{
   const onSubmit = (data: { rating: string }) => {
     props.onSave(data, props?.happinessRating?.id)
   }
-
-  const { currentUser, isAuthenticated } = useAuth()
 
   return (
     <div className="rw-form-wrapper">
@@ -92,10 +90,9 @@ const HappinessRatingForm: React.FC<{
           component="h1"
           variant="h4"
           align="center"
-          sx={{ my: { xs: 2, sm: 4, md: 8, lg: 12 } }}
+          sx={{ my: { xs: 4, sm: 8, md: 12 } }}
         >
-          🙏 Hi {isAuthenticated ? currentUser?.firstName : 'there'}, how are
-          you?
+          {props?.title}
         </Typography>
 
         <Stack sx={{ height: 400, mt: 6 }} spacing={1} alignItems="center">
@@ -104,7 +101,7 @@ const HappinessRatingForm: React.FC<{
             valueLabelDisplay="on"
             orientation="vertical"
             aria-label="Temperature"
-            defaultValue={6}
+            defaultValue={props?.happinessRating?.rating || 6}
             track={false}
             marks={marks}
             step={1}

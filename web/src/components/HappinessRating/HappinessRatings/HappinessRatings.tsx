@@ -8,7 +8,6 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
-import humanize from 'humanize-string'
 import { Line } from 'react-chartjs-2'
 import { HappinessRating } from 'types/graphql'
 
@@ -17,6 +16,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/HappinessRating/HappinessRatingsCell'
+import MainDateTime from 'src/components/MainDateTime'
 
 ChartJS.register(
   CategoryScale,
@@ -38,41 +38,12 @@ const DELETE_HAPPINESS_RATING_MUTATION = gql`
 
 const MAX_STRING_LENGTH = 150
 
-const formatEnum = (values: string | string[] | null | undefined) => {
-  if (values) {
-    if (Array.isArray(values)) {
-      const humanizedValues = values.map((value) => humanize(value))
-      return humanizedValues.join(', ')
-    } else {
-      return humanize(values as string)
-    }
-  }
-}
-
 const truncate = (text) => {
   let output = text
   if (text && text.length > MAX_STRING_LENGTH) {
     output = output.substring(0, MAX_STRING_LENGTH) + '...'
   }
   return output
-}
-
-const jsonTruncate = (obj) => {
-  return truncate(JSON.stringify(obj, null, 2))
-}
-
-const timeTag = (datetime) => {
-  return (
-    datetime && (
-      <time dateTime={datetime} title={datetime}>
-        {new Date(datetime).toUTCString()}
-      </time>
-    )
-  )
-}
-
-const checkboxInputTag = (checked) => {
-  return <input type="checkbox" checked={checked} disabled />
 }
 
 const HappinessRatingsList = ({
@@ -102,7 +73,7 @@ const HappinessRatingsList = ({
       },
       title: {
         display: true,
-        text: 'Happiness Ratings Line Chart',
+        text: 'Summary',
       },
     },
   }
@@ -111,7 +82,7 @@ const HappinessRatingsList = ({
     DELETE_HAPPINESS_RATING_MUTATION,
     {
       onCompleted: () => {
-        toast.success('HappinessRating deleted')
+        toast.success('Rating deleted')
       },
       onError: (error) => {
         toast.error(error.message)
@@ -124,9 +95,11 @@ const HappinessRatingsList = ({
     }
   )
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id, happinessRating) => {
     if (
-      confirm('Are you sure you want to delete happinessRating ' + id + '?')
+      confirm(
+        `Are you sure you want to delete the rating ${happinessRating.rating}?`
+      )
     ) {
       deleteHappinessRating({ variables: { id } })
     }
@@ -139,45 +112,46 @@ const HappinessRatingsList = ({
       <table className="rw-table">
         <thead>
           <tr>
-            <th>Id</th>
             <th>Rating</th>
-            <th>Description</th>
-            <th>Created by</th>
             <th>Created at</th>
+            <th>Description</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
+
         <tbody>
           {happinessRatings.map((happinessRating) => (
             <tr key={happinessRating.id}>
-              <td>{truncate(happinessRating.id)}</td>
-              <td>{truncate(happinessRating.rating)}</td>
+              <td>{happinessRating.rating}</td>
+              <td>
+                <MainDateTime datetime={happinessRating.createdAt} />
+              </td>
               <td>{truncate(happinessRating.description)}</td>
-              <td>{truncate(happinessRating.createdBy)}</td>
-              <td>{timeTag(happinessRating.createdAt)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link
                     to={routes.happinessRating({ id: happinessRating.id })}
-                    title={
-                      'Show happinessRating ' + happinessRating.id + ' detail'
-                    }
+                    title={'Show Rating #' + happinessRating.id + ' detail'}
                     className="rw-button rw-button-small"
                   >
                     Show
                   </Link>
+
                   <Link
                     to={routes.editHappinessRating({ id: happinessRating.id })}
-                    title={'Edit happinessRating ' + happinessRating.id}
+                    title={'Edit Rating #' + happinessRating.id}
                     className="rw-button rw-button-small rw-button-blue"
                   >
                     Edit
                   </Link>
+
                   <button
                     type="button"
-                    title={'Delete happinessRating ' + happinessRating.id}
+                    title={'Delete Rating # ' + happinessRating.id}
                     className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(happinessRating.id)}
+                    onClick={() =>
+                      onDeleteClick(happinessRating.id, happinessRating)
+                    }
                   >
                     Delete
                   </button>

@@ -1,3 +1,4 @@
+import { useAuth } from '@redwoodjs/auth'
 import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
@@ -13,6 +14,8 @@ const CREATE_HAPPINESS_RATING_MUTATION = gql`
 `
 
 const NewHappinessRating = () => {
+  const { currentUser, isAuthenticated } = useAuth()
+
   const [createHappinessRating, { loading, error }] = useMutation(
     CREATE_HAPPINESS_RATING_MUTATION,
     {
@@ -32,7 +35,19 @@ const NewHappinessRating = () => {
     })
   }
 
-  return <HappinessRatingForm onSave={onSave} loading={loading} error={error} />
+  const title = `🙏 Hi ${
+    isAuthenticated ? currentUser?.firstName : 'there'
+  }, how are
+  you?`
+
+  return (
+    <HappinessRatingForm
+      onSave={onSave}
+      loading={loading}
+      error={error}
+      title={title}
+    />
+  )
 }
 
 export default NewHappinessRating
