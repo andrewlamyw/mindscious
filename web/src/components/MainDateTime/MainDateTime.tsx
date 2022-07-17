@@ -1,4 +1,4 @@
-import { formatDate } from 'src/utils/dateUtils'
+import { formatDate } from 'src/utils'
 
 const MainDateTime = ({ datetime }) => {
   return <time dateTime={datetime}>{formatDate(datetime)}</time>
