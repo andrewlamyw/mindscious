@@ -14,6 +14,17 @@ import {
 const RATING = 'rating'
 
 const KeyTrends = ({ data }: { data: [] }) => {
+  const totalCheckIns = data.length
+  if (totalCheckIns <= 1) {
+    return (
+      <Box sx={{ my: 5 }}>
+        <Typography variant="body1" gutterBottom>
+          Submit more ratings to see the key trends.
+        </Typography>
+      </Box>
+    )
+  }
+
   const { average, high, low, stdev, firstRating, lastRating } = tidy(
     data,
     summarize({
@@ -28,12 +39,11 @@ const KeyTrends = ({ data }: { data: [] }) => {
 
   let overallTrend = ''
   const differences = lastRating - firstRating
-  const totalCheckIns = data.length
 
   if (differences > 0)
-    overallTrend = `The overall trend is positive, with an increase of ${differences} points seen across the ${totalCheckIns} check-ins.`
+    overallTrend = `The overall trend is positive ↗, with an increase of ${differences} points seen across the ${totalCheckIns} check-ins.`
   else if (differences < 0)
-    overallTrend = `The overall trend is negative, with a decline of ${Math.abs(
+    overallTrend = `The overall trend is negative ↘, with a decline of ${Math.abs(
       differences
     )} points seen across the ${totalCheckIns} check-ins.`
   else
