@@ -3,7 +3,9 @@ import type { QueryResolvers, MutationResolvers } from 'types/graphql'
 import { db } from 'src/lib/db'
 
 export const happinessRatings: QueryResolvers['happinessRatings'] = () => {
-  return db.happinessRating.findMany()
+  return db.happinessRating.findMany({
+    where: { createdBy: context.currentUser.id },
+  })
 }
 
 export const happinessRating: QueryResolvers['happinessRating'] = ({ id }) => {
