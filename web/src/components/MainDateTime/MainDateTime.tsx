@@ -1,19 +1,7 @@
-import { DateTime } from 'luxon'
-
-const dateFormat = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  hour: 'numeric',
-  minute: '2-digit',
-}
+import { formatDate } from 'src/utils/dateUtils'
 
 const MainDateTime = ({ datetime }) => {
-  return (
-    <time dateTime={datetime}>
-      {DateTime.fromISO(datetime).toLocaleString(dateFormat)}
-    </time>
-  )
+  return <time dateTime={datetime}>{formatDate(datetime)}</time>
 }
 
 export default MainDateTime
