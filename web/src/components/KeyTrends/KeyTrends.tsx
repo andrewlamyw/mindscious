@@ -19,7 +19,7 @@ const KeyTrends = ({ data }: { data: [] }) => {
     return (
       <Box sx={{ my: 5 }}>
         <Typography variant="body1" gutterBottom>
-          Submit more ratings to see the key trends.
+          Submit more ratings to see the key trends. 😉
         </Typography>
       </Box>
     )

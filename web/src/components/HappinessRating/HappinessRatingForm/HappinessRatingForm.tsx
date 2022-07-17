@@ -8,7 +8,10 @@ import Typography from '@mui/material/Typography'
 import { useForm } from 'react-hook-form'
 import { HappinessRating } from 'types/graphql'
 
+import { useAuth } from '@redwoodjs/auth'
 import { Form, FormError } from '@redwoodjs/forms'
+
+import AuthDialog from 'src/components/AuthDialog'
 
 const marks = [
   { value: 11, label: '' },
@@ -69,6 +72,9 @@ const HappinessRatingForm: React.FC<{
   loading?: boolean
   title?: string
 }> = (props) => {
+  const { isAuthenticated } = useAuth()
+  const [dialogOpen, setDialogOpen] = React.useState(false)
+
   const formMethods = useForm()
   const { register } = formMethods
 
@@ -76,8 +82,17 @@ const HappinessRatingForm: React.FC<{
     props.onSave(data, props?.happinessRating?.id)
   }
 
+  const verifyLogin = (event: Event) => {
+    if (!isAuthenticated) {
+      event.preventDefault()
+      setDialogOpen(true)
+    }
+  }
+
   return (
     <div className="rw-form-wrapper">
+      <AuthDialog open={dialogOpen} handleClose={() => setDialogOpen(false)} />
+
       <Form onSubmit={onSubmit} error={props.error} formMethods={formMethods}>
         <FormError
           error={props.error}
@@ -124,6 +139,7 @@ const HappinessRatingForm: React.FC<{
             disabled={props.loading}
             variant="contained"
             endIcon={<SaveIcon />}
+            onClick={verifyLogin}
             type="submit"
             size="large"
             sx={{ maxWidth: 'sm' }}
