@@ -5,6 +5,7 @@ import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import { useForm } from 'react-hook-form'
+import { HappinessRating } from 'types/graphql'
 
 import { useAuth } from '@redwoodjs/auth'
 import { Form, FormError } from '@redwoodjs/forms'
@@ -62,20 +63,19 @@ const StyledSlider = styled(Slider)(({ theme }) => ({
   },
 })) as typeof Slider
 
-const HappinessRatingForm = (props) => {
+const HappinessRatingForm: React.FC<{
+  onSave: ({ rating }: { rating: string }, id?: number) => void
+  happinessRating?: HappinessRating
+  loading?: boolean
+}> = (props) => {
   const formMethods = useForm()
   const { register } = formMethods
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: { rating: string }) => {
     props.onSave(data, props?.happinessRating?.id)
   }
 
   const { currentUser, isAuthenticated } = useAuth()
-  // const [rating, setRating] = React.useState<number>(6)
-
-  // const handleSliderChange = (event: Event, newRating: number | number[]) => {
-  //   setRating(newRating as number)
-  // }
 
   return (
     <div className="rw-form-wrapper">
@@ -94,7 +94,7 @@ const HappinessRatingForm = (props) => {
           align="center"
           sx={{ my: { xs: 2, sm: 4, md: 8, lg: 12 } }}
         >
-          🙏 Hi {isAuthenticated ? currentUser.firstName : 'there'}, how are
+          🙏 Hi {isAuthenticated ? currentUser?.firstName : 'there'}, how are
           you?
         </Typography>
 
@@ -105,8 +105,6 @@ const HappinessRatingForm = (props) => {
             orientation="vertical"
             aria-label="Temperature"
             defaultValue={6}
-            // onChange={handleSliderChange}
-            // value={rating}
             track={false}
             marks={marks}
             step={1}

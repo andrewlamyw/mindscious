@@ -26,7 +26,7 @@ const NewHappinessRating = () => {
     }
   )
 
-  const onSave = (input) => {
+  const onSave = (input: { rating: string }) => {
     createHappinessRating({
       variables: { input: { rating: parseInt(input.rating) } },
     })
