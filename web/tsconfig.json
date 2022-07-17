@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    // https://mui.com/material-ui/guides/typescript/#minimum-configuration
+    "lib": ["es6", "dom"],
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+
     "noEmit": true,
     "allowJs": true,
     "esModuleInterop": true,

@@ -58,7 +58,7 @@ const StyledSlider = styled(Slider)(({ theme }) => ({
     fontSize: '1.25rem',
     paddingLeft: '1rem',
   },
-}))
+})) as typeof Slider
 
 const Home = () => {
   const { currentUser, isAuthenticated } = useAuth()
