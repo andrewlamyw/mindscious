@@ -1,6 +1,14 @@
+import { FunctionComponentElement } from 'react'
+
 import { formatDate } from 'src/utils'
 
-const MainDateTime = ({ datetime }) => {
+type MainDateTimeProps = {
+  datetime: string
+}
+
+const MainDateTime = ({
+  datetime,
+}: MainDateTimeProps): FunctionComponentElement<MainDateTimeProps> => {
   return <time dateTime={datetime}>{formatDate(datetime)}</time>
 }
 

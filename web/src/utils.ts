@@ -1,6 +1,6 @@
-import { DateTime } from 'luxon'
+import { DateTimeFormatOptions, DateTime } from 'luxon'
 
-const dateFormat = {
+const dateFormat: DateTimeFormatOptions = {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
@@ -8,10 +8,10 @@ const dateFormat = {
   minute: '2-digit',
 }
 
-export const formatDate = (date) =>
+export const formatDate = (date: string): string =>
   DateTime.fromISO(date).toLocaleString(dateFormat)
 
-export const getRatingIcon = (rating: number) => {
+export const getRatingEmoji = (rating: number): string => {
   if (rating >= 10) {
     return '🤩'
   } else if (rating >= 8) {

@@ -6379,6 +6379,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/luxon@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "@types/luxon@npm:2.3.2"
+  checksum: a099fb5b0d3a0c1682756400bed1edd451f2feb221c8eed3e95ef7d344550a1d38d3acbb037f177adcaa8abf93fb00a448e4e751685496b6a8c279592cc48425
+  languageName: node
+  linkType: hard
+
 "@types/mdast@npm:^3.0.0":
   version: 3.0.10
   resolution: "@types/mdast@npm:3.0.10"
@@ -24649,6 +24656,7 @@ __metadata:
     "@redwoodjs/forms": 2.1.0
     "@redwoodjs/router": 2.1.0
     "@redwoodjs/web": 2.1.0
+    "@types/luxon": ^2.3.2
     chart.js: ^3.8.0
     luxon: ^3.0.1
     prop-types: 15.8.1
