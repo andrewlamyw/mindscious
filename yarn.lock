@@ -5878,6 +5878,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tidyjs/tidy@npm:^2.4.6":
+  version: 2.4.6
+  resolution: "@tidyjs/tidy@npm:2.4.6"
+  dependencies:
+    d3-array: ^2.9.1
+    ts-toolbelt: ^8.0.7
+  checksum: 89a92eb0669f20d47c384db9027d586ec5b2ee8c8a987c918cca46ea53e39de34e337c7718863399b7847f8cf03d3f17dc9f0247616f608873ae35882463fe93
+  languageName: node
+  linkType: hard
+
 "@timsuchanek/copy@npm:1.4.5":
   version: 1.4.5
   resolution: "@timsuchanek/copy@npm:1.4.5"
@@ -10728,6 +10738,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"d3-array@npm:^2.9.1":
+  version: 2.12.1
+  resolution: "d3-array@npm:2.12.1"
+  dependencies:
+    internmap: ^1.0.0
+  checksum: 7eca10427a9f113a4ca6a0f7301127cab26043fd5e362631ef5a0edd1c4b2dd70c56ed317566700c31e4a6d88b55f3951aaba192291817f243b730cb2352882e
+  languageName: node
+  linkType: hard
+
 "damerau-levenshtein@npm:^1.0.7":
   version: 1.0.8
   resolution: "damerau-levenshtein@npm:1.0.8"
@@ -14963,6 +14982,13 @@ __metadata:
     has: ^1.0.3
     side-channel: ^1.0.4
   checksum: bb41342a474c1b607458b0c716c742d779a6ed9dfaf7986e5d20d1e7f55b7f3676e4d9f416bc253af4fd78d367e1f83e586f74840302bcf2e60c424f9284dde5
+  languageName: node
+  linkType: hard
+
+"internmap@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "internmap@npm:1.0.1"
+  checksum: 60942be815ca19da643b6d4f23bd0bf4e8c97abbd080fb963fe67583b60bdfb3530448ad4486bae40810e92317bded9995cc31411218acc750d72cd4e8646eee
   languageName: node
   linkType: hard
 
@@ -23737,6 +23763,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ts-toolbelt@npm:^8.0.7":
+  version: 8.4.0
+  resolution: "ts-toolbelt@npm:8.4.0"
+  checksum: ca7b7ec1adcae2b84529f1d728a3b8a84aba71e614b1353b54d1c2673c12679eb3b22a7adfe8fe81b080ea471c6ca45e9be2ecfcbaef42adb55160799143698c
+  languageName: node
+  linkType: hard
+
 "tsconfig-paths@npm:^3.14.1":
   version: 3.14.1
   resolution: "tsconfig-paths@npm:3.14.1"
@@ -24656,6 +24689,7 @@ __metadata:
     "@redwoodjs/forms": 2.1.0
     "@redwoodjs/router": 2.1.0
     "@redwoodjs/web": 2.1.0
+    "@tidyjs/tidy": ^2.4.6
     "@types/luxon": ^2.3.2
     chart.js: ^3.8.0
     luxon: ^3.0.1

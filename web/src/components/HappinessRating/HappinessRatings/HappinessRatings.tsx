@@ -1,9 +1,12 @@
 import Avatar from '@mui/material/Avatar'
+import Box from '@mui/material/Box'
+import Divider from '@mui/material/Divider'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemText from '@mui/material/ListItemText'
 import { useTheme } from '@mui/material/styles'
+import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import {
   CategoryScale,
@@ -23,6 +26,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/HappinessRating/HappinessRatingsCell'
+import KeyTrends from 'src/components/KeyTrends'
 import MainDateTime from 'src/components/MainDateTime'
 import { formatDate, getRatingEmoji } from 'src/utils'
 
@@ -69,7 +73,7 @@ const HappinessRatingsList = ({
     datasets: [
       {
         data: happinessRatings.map((rating) => rating.rating),
-        label: 'Happiness Ratings',
+        label: 'Ratings',
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
@@ -81,10 +85,6 @@ const HappinessRatingsList = ({
     plugins: {
       legend: {
         position: 'top' as const,
-      },
-      title: {
-        display: true,
-        text: 'Summary',
       },
     },
   }
@@ -119,6 +119,8 @@ const HappinessRatingsList = ({
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
       <Line data={lineChartData} options={lineChartOptions} />
+
+      <KeyTrends data={happinessRatings} />
 
       {isLargeScreen ? (
         <table className="rw-table">
@@ -176,31 +178,45 @@ const HappinessRatingsList = ({
           </tbody>
         </table>
       ) : (
-        <List>
-          {happinessRatings?.map((rating) => (
-            <ListItem
-              key={rating.id}
-              disableGutters
-              onClick={() =>
-                navigate(routes.happinessRating({ id: rating.id }))
-              }
-            >
-              <ListItemAvatar>
-                <Avatar sx={{ backgroundColor: 'rgb(0,0,0,.1)' }}>
-                  {getRatingEmoji(rating.rating)}
-                </Avatar>
-              </ListItemAvatar>
+        <Box>
+          <Typography variant="h6" gutterBottom component="div">
+            Past Ratings
+          </Typography>
 
-              <ListItemText
-                primary={formatDate(rating.createdAt)}
-                secondary={
-                  rating.rating +
-                  (rating.description ? ` - ${rating.description}` : '')
-                }
-              />
-            </ListItem>
-          ))}
-        </List>
+          <Typography variant="subtitle1" gutterBottom component="div">
+            Select to edit or delete a rating 👇
+          </Typography>
+
+          <List>
+            {happinessRatings?.map((rating) => (
+              <>
+                <ListItem
+                  key={rating.id}
+                  disableGutters
+                  onClick={() =>
+                    navigate(routes.happinessRating({ id: rating.id }))
+                  }
+                >
+                  <ListItemAvatar>
+                    <Avatar sx={{ backgroundColor: 'rgb(0,0,0,.1)' }}>
+                      {getRatingEmoji(rating.rating)}
+                    </Avatar>
+                  </ListItemAvatar>
+
+                  <ListItemText
+                    primary={formatDate(rating.createdAt)}
+                    secondary={
+                      rating.rating +
+                      (rating.description ? ` - ${rating.description}` : '')
+                    }
+                  />
+                </ListItem>
+
+                <Divider variant="inset" component="li" />
+              </>
+            ))}
+          </List>
+        </Box>
       )}
     </div>
   )

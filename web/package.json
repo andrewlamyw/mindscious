@@ -24,6 +24,7 @@
     "@redwoodjs/forms": "2.1.0",
     "@redwoodjs/router": "2.1.0",
     "@redwoodjs/web": "2.1.0",
+    "@tidyjs/tidy": "^2.4.6",
     "chart.js": "^3.8.0",
     "luxon": "^3.0.1",
     "prop-types": "15.8.1",
