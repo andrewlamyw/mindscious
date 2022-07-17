@@ -16,7 +16,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   const { loading } = useAuth()
 
   return (
-    <>
+    <Box sx={{ minHeight: '100vh' }}>
       <CssBaseline />
 
       {loading && (
@@ -28,7 +28,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       <Header />
 
       <Container maxWidth="lg">{children}</Container>
-    </>
+    </Box>
   )
 }
 

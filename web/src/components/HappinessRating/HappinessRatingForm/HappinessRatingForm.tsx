@@ -111,7 +111,11 @@ const HappinessRatingForm: React.FC<{
           {props?.title}
         </Typography>
 
-        <Stack sx={{ height: 500, mt: 6 }} spacing={3} alignItems="center">
+        <Stack
+          sx={{ height: 500, mt: 6, mb: 2 }}
+          spacing={3}
+          alignItems="center"
+        >
           <StyledSlider
             {...register('rating')}
             valueLabelDisplay="on"
