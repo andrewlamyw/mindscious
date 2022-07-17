@@ -1,3 +1,6 @@
+import SaveIcon from '@mui/icons-material/Save'
+import SendIcon from '@mui/icons-material/Send'
+import Button from '@mui/material/Button'
 import Slider from '@mui/material/Slider'
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles'
@@ -6,21 +9,22 @@ import Typography from '@mui/material/Typography'
 import { useAuth } from '@redwoodjs/auth'
 
 const marks = [
-  { value: 11, label: '🤩 AWEEEZOME!!' },
-  { value: 10, label: '' },
+  { value: 11, label: '' },
+  { value: 10, label: '🤩 AWEEEZOME!!' },
   { value: 9, label: '' },
-  { value: 8, label: '👍 Gooooood~' },
+  { value: 8, label: '👍 Goooood~' },
   { value: 7, label: '' },
   { value: 6, label: '👌 Okok loh' },
   { value: 5, label: '' },
   { value: 4, label: '🙅‍♀️ NUt great...' },
   { value: 3, label: '' },
-  { value: 2, label: '' },
-  { value: 1, label: "💆‍♂️ TerrRRible :'(" },
+  { value: 2, label: "💆‍♂️ TerrRRible :'(" },
+  { value: 1, label: '' },
 ]
 
-const CustomSlider = styled(Slider)({
+const StyledSlider = styled(Slider)(({ theme }) => ({
   color: '#52af77',
+  marginBottom: theme.spacing(5),
   width: '1rem',
   '& .MuiSlider-thumb': {
     height: 36,
@@ -55,10 +59,16 @@ const CustomSlider = styled(Slider)({
     fontSize: '1.25rem',
     left: '3.5rem',
   },
-})
+}))
 
 const HomePage = () => {
   const { currentUser, isAuthenticated } = useAuth()
+  const [rating, setRating] = React.useState<number>(6)
+
+  const handleSliderChange = (event: Event, newRating: number | number[]) => {
+    setRating(newRating as number)
+  }
+
   return (
     <>
       <Typography
@@ -68,26 +78,32 @@ const HomePage = () => {
         align="center"
         sx={{ my: 2 }}
       >
-        👋Hi {isAuthenticated ? currentUser.firstName : 'there'}, how are you?
-        🤗
+        🙏 Hi {isAuthenticated ? currentUser.firstName : 'there'}, how are you?
       </Typography>
 
-      <Stack
-        sx={{ height: 300, mt: 6 }}
-        spacing={1}
-        direction="row"
-        justifyContent="center"
-      >
-        <CustomSlider
+      <Stack sx={{ height: 400, mt: 6 }} spacing={1} alignItems="center">
+        <StyledSlider
           valueLabelDisplay="on"
-          defaultValue={6}
           orientation="vertical"
           aria-label="Temperature"
+          onChange={handleSliderChange}
+          value={rating}
+          track={false}
           marks={marks}
           step={1}
           max={11}
           min={1}
         />
+
+        <Button
+          variant="contained"
+          endIcon={<SaveIcon />}
+          fullWidth
+          size="large"
+          sx={{ maxWidth: '25rem' }}
+        >
+          Save
+        </Button>
       </Stack>
     </>
   )
