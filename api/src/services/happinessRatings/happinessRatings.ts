@@ -5,6 +5,7 @@ import { db } from 'src/lib/db'
 export const happinessRatings: QueryResolvers['happinessRatings'] = () => {
   return db.happinessRating.findMany({
     where: { createdBy: context.currentUser.id },
+    orderBy: { createdAt: 'asc' },
   })
 }
 
