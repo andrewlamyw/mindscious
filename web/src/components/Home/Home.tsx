@@ -75,7 +75,7 @@ const Home = () => {
         component="h1"
         variant="h4"
         align="center"
-        sx={{ my: 2 }}
+        sx={{ my: { xs: 2, sm: 4, md: 8, lg: 12 } }}
       >
         🙏 Hi {isAuthenticated ? currentUser.firstName : 'there'}, how are you?
       </Typography>
